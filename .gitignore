@@ -1,0 +1,12 @@
+*~
+*.swp
+*.aux
+*.log
+*.bbl
+*.bak
+*.run.xml
+*.blg
+*.end
+*.out
+*-blx.bib
+*Notes.bib

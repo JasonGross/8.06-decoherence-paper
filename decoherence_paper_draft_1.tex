@@ -1,5 +1,26 @@
+%================= gummi hack for multiple bibliographies ==============
+% *sigh*
+\bgroup
+\def\bibfile{decoherence.bib}
+\def\otherbibfile{decoherence_paper_draft_1Notes.bib}
+\def\gtmpdir#1{C:/Users/Jason Gross/gtmp/#1}
+
+\def\execcommand#1{\message{#1^^J}\immediate\write18{#1}}
+
+\edef\bibfilecopy{\gtmpdir{\bibfile}}
+\edef\otherbibfilecopy{\gtmpdir{\otherbibfile}}
+
+\execcommand{cp -v "\bibfile" "\bibfilecopy"}
+\execcommand{cp -v "\otherbibfile" "\otherbibfilecopy"}
+
+\execcommand{bibtex decoherence_paper_draft_1}
+\execcommand{bibtex "\gtmpdir{\jobname}"}
+\egroup
+%======================================================================
+
+
 %\documentclass[aps,prd,preprint]{revtex4}
-\documentclass[aps,prd,final,twocolumn,10pt]{revtex4}
+\documentclass[aps,prd,final,twocolumn,10pt,longbibliography,nobibnotes]{revtex4-1}
 
 % Note:  comment out one of the two documentclass commands, depending
 % on whether you need the final or preprint version. It is most convenient
@@ -17,16 +38,16 @@
 \setlength{\paperwidth}{8.5in}
 \setlength{\paperheight}{11in}
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
-\usepackage{enumerate}
+%\usepackage{enumerate}
 
 %\usepackage{wrapfig}
 %\usepackage{cancel}
 %\usepackage{undertilde}
 
-\usepackage{stackrel}
-\usepackage{xcolor}
+%\usepackage{stackrel}
+%\usepackage{xcolor} % required to not duplicate email address?!........ but only when we're one page long.... or not
 
-\usepackage{mathtools}[2011/04/06]
+%\usepackage{mathtools}[2011/04/06]
 
 %\usepackage{pgf,tikz}
 %\usetikzlibrary{arrows}
@@ -46,42 +67,84 @@
 %%%%%%%%%%%%%%%
 
 
+\newcommand{\mytitle}{Decoherence: An Explanation of Quantum Measurement}
+\newcommand{\myauthor}{Jason~Gross}
+
+\hypersetup{
+  pdftitle={\mytitle},
+  pdfauthor={\myauthor}
+}
 
 \begin{document}
-\title{An Algebraic Approach to Reflectionless Potentials in One Dimension}
-\author{Jason~Gross}
-
-\makeatletter
-\hypersetup{
-  pdftitle={\@title},
-  pdfauthor={\@author}
-}
-\edef\domarkboth{\noexpand\markboth{\@author}{\@title}}
-\makeatother
-
-\affiliation{ Massachusetts Institute of Technology,
+\title{\mytitle}
+\author{\myauthor}
+\email{jgross@mit.edu}
+\affiliation{Massachusetts Institute of Technology,
  77 Massachusetts Ave.,
 Cambridge, MA 02139-4307}
 \date{\today} 
 
 
 \begin{abstract}
-\noindent	
-We develop algebraic methods to find the eigenenergies and 
-	eigenstates of reflectionless potentials in one dimension.  
+  \noindent
+  The description of the world given by quantum mechanics is at odds with our classical experience.  Most of this conflict resides in the concept of ``measurement''.  After explaining the origins of the controversy, I will introduce decoherence as a way of describing classical measurements from an entirely quantum perspective.  I will discuss basis ambiguity and the problem of information flow in a system + observer model, and explain how introducing the environment removes this ambiguity via environmentally-induced superselection.  I intend to describe two toy models for decoherence to demonstrate measurement in a quantum system.  I intend to conclude with an explanation of the ``derivations'' of Born's Rule due to Everett, Gleason, and, most recently, Zurek, the last of which I believe uses decoherence.
 \end{abstract}
 
 \maketitle
 \pagestyle{myheadings}
-\domarkboth
+\markboth{\myauthor}{\mytitle}
 \thispagestyle{empty}
 
 
 \section{Introduction}
+  Useful papers: \cite{zurek2003decoherence,Zurek1998}
+  
+  \subsection{The Problem: Classicality}
+    ``Hilbert space is big''  Most of it is not classical.  This conflicts with what we seem to experience.
+  
+  \subsection{Interpretations of Quantum Mechanics}
+    \subsubsection{Copenhagen}
+    \subsubsection{Many Worlds}
+    \allowbreak
+  
+  \subsection{The Role of The Environment}
+    Talk about pointer states.
+    
+\allowbreak
+\section{Environment, System, Observers}
+  Talk about how to split the universe into enviornment, system, and observer.
 
+\section{Measurement}
 
+\section{Decoherence}
+\allowbreak
+  \subsection{Toy Model: \texorpdfstring{\texttt{c-not}}{c-not}}
+    See \cite{zurek2003decoherence}.
+   
+  \allowbreak
+  \subsection{Basis Ambiguity \& Direction of Information Flow}
+    In \texttt{c-not}, it's not clear what the system is and what the observer is.
+    
+  \subsection{Environmentally Induced Superselection}
+  
+  
+  \subsection{Toy Model: \texorpdfstring{\texttt{c-not}}{c-not} + Environment}
+  
+  \allowbreak
+  \subsection{Toy Model for Decoherence}
+    I'll probably use a system with spins, and spin-spin coupling with the environment, a la \cite{Cucchietti2005}.  I'll probably calculate decoherence time.
 
-%\subsection*{Acknowledgments}
+\allowbreak
+\section{Deriving Born's Rule}
+  Everett and Gleason independently(?) proved in \cite{Gleason1957, Everett1957} that the norm squared measure is the only possible probability measure on a Hilbert space of dimension $\ge 3$.  Zurek derives Born's Rule in \cite{zurek2003decoherence,Zurek2007,Zurek2005} from the stand-point of decoherence. 
+
+\allowbreak
+\section{What's Left?}
+  Talk about remaining interpretational problems.
+  
+\section*{Acknowledgments}
+  The author will be gratful to acknowledge Fakhri Zahedy (\href{mailto:fsz@mit.edu}{fsz@mit.edu}), his peer reviewer.
+  
  
 %The author is grateful to Jeffrey Goldstone for conversations on 
 %reflectionless potentials.  This work is supported in part by funds 
